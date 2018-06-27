@@ -1,5 +1,4 @@
 const request = require('request');
-const striptags = require('striptags');
 
 // fix Date.parse
 const MONTH = [
@@ -61,7 +60,7 @@ class Browser {
       const [, party] = html.match(/<h4 class="bt-chart-fraktion">(.*?)<br\/>/s);
       const voteResults = html
         .match(/<li class="bt-legend-(?:ja|nein|enthalten|na)">(.*?)<\/li>/gs)
-        .map(html => html.match(/>(.*?)</)[1].split(' '))
+        .map(voteResultHtml => voteResultHtml.match(/>(.*?)</)[1].split(' '))
         .reduce((prev, [votes, decision]) => ({ ...prev, [decision]: votes }), {});
       return { [party]: voteResults };
     });
