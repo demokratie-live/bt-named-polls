@@ -1,7 +1,7 @@
 {
-  "name": "@democracy-deutschland/bt-agenda",
-  "version": "0.2.5-0",
-  "description": "scraper for the german \"Bundestag\" (Tagesordungen)",
+  "name": "@democracy-deutschland/bt-named-polls",
+  "version": "0.1.0",
+  "description": "scraper for the german \"Bundestag\" (Namentliche Abstimmungen)",
   "main": "distribution/scraper.js",
   "author": "Manuel Ruck",
   "license": "Apache-2.0",
