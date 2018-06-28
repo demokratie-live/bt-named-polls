@@ -56,14 +56,14 @@ class Browser {
 
   getPartyVotes = (body) => {
     const partyVotesHtml = body.match(/<div class="col-xs-12 col-sm-3">(.*?)<\/a>\s*<\/div>/gs);
-    const partyVotes = partyVotesHtml.map((html) => {
+    const partyVotes = partyVotesHtml.reduce((prev, html) => {
       const [, party] = html.match(/<h4 class="bt-chart-fraktion">(.*?)<br\/>/s);
       const voteResults = html
         .match(/<li class="bt-legend-(?:ja|nein|enthalten|na)">(.*?)<\/li>/gs)
         .map(voteResultHtml => voteResultHtml.match(/>(.*?)</)[1].split(' '))
         .reduce((prev, [votes, decision]) => ({ ...prev, [decision]: votes }), {});
-      return { [party]: voteResults };
-    });
+      return { ...prev, [party]: voteResults };
+    }, {});
     return partyVotes;
   };
 }
