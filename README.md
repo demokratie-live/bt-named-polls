@@ -35,7 +35,7 @@ yarn start
 ### Sart with Parameters
 
 ```
-yarn start --year=2018 --week=13 --continue=yes
+yarn start --start 1
 ```
 
 ### Test Project
@@ -51,7 +51,7 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). Start by checki
 
 ## License
 
-Copyright © 2017-present DEMOCRACY Deutschland e.V.. This source code is licensed under the Apache 2.0 license found in the
+Copyright © 2018-present DEMOCRACY Deutschland e.V.. This source code is licensed under the Apache 2.0 license found in the
 [LICENSE](https://github.com/bundestag/bt-named-polls/blob/master/LICENSE) file.
 
 ---
