@@ -49,8 +49,10 @@ class Browser {
       date = date.replace(`${string}`, `${fix}`);
     });
     let documents = [];
-    documents = documentsData.map(doc =>
-      doc.replace('<i class="icon-doc"></i>', '').replace('</a>', ''));
+    if (documentsData) {
+      documents = documentsData.map(doc =>
+        doc.replace('<i class="icon-doc"></i>', '').replace('</a>', ''));
+    }
     return { date: new Date(Date.parse(date)), title, documents };
   };
 
