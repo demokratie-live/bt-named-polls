@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 /* eslint-disable no-throw-literal */
-import events from 'events';
 
 import Browser from './Browser';
 
@@ -9,6 +8,8 @@ process.setMaxListeners(Infinity);
 class Scraper {
   options = {
     startId: 1,
+    onData: false,
+    onFinish: false,
   };
 
   urls = {
@@ -20,7 +21,7 @@ class Scraper {
 
   browser = null;
   scrapedWeeks = [];
-  eventEmitter = new events.EventEmitter();
+  dataPromises = [];
 
   lastTitle = '';
   pollIds = [];
@@ -35,6 +36,10 @@ class Scraper {
     await this.getAvailablePolls();
 
     await this.getPolls({ id: parseInt(this.options.startId, 10) });
+    if (this.options.onFinish) {
+      await Promise.all(this.dataPromises);
+      await this.options.onFinish({ length: this.dataPromises.length });
+    }
   }
 
   getAvailablePolls = async () => {
@@ -111,19 +116,15 @@ class Scraper {
           documents,
           voteResults,
         };
-        this.eventEmitter.emit('data', resultData);
+        if (this.options.onData) {
+          this.dataPromises = [...this.dataPromises, this.options.onData(resultData)];
+        }
         errorCount = 0;
       } catch (error) {
-        this.eventEmitter.emit('error', { error, id: curId });
         errorCount += 1;
       }
 
       curId = this.getClosestPollId(curId);
-    }
-    if (errorCount >= 5) {
-      this.eventEmitter.emit('finish', { success: false });
-    } else {
-      this.eventEmitter.emit('finish', { success: true });
     }
   };
 
@@ -139,10 +140,6 @@ class Scraper {
       scraped: 0,
       errors: 0,
     };
-  };
-
-  addListener = (type, callback) => {
-    this.eventEmitter.on(type, callback);
   };
 }
 

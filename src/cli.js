@@ -17,13 +17,11 @@ process.on('SIGINT', async () => {
   process.exit(1);
 });
 
-scraper.addListener('data', data => console.log('new data', util.inspect(data, false, null)));
-scraper.addListener('finish', data => console.log('FINISH', util.inspect(data, false, null)));
-scraper.addListener('error', data => console.log('ERROR', util.inspect(data, false, null)));
-
 scraper
   .scrape({
     startId: program.start,
+    onData: data => console.log('new data', util.inspect(data, false, null)),
+    onFinish: data => console.log('FINISH', util.inspect(data, false, null)),
   })
   .catch((error) => {
     console.error(error);
