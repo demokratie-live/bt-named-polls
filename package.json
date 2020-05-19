@@ -1,6 +1,6 @@
 {
   "name": "@democracy-deutschland/bt-named-polls",
-  "version": "0.1.1-0",
+  "version": "1.0.0",
   "description": "scraper for the german \"Bundestag\" (Namentliche Abstimmungen)",
   "main": "distribution/scraper.js",
   "author": "Manuel Ruck",
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "babel-node src/cli.js",
-    "dev": "babel-node --trace_gc src/cli.js",
+    "dev": "babel-node src/cli.js",
     "lint": "eslint ./src",
     "build": "babel src --out-dir distribution",
     "prepare": "npm run build",

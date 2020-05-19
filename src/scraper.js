@@ -15,7 +15,7 @@ class Scraper {
   urls = {
     get: ({ id }) => `https://www.bundestag.de/parlament/plenum/abstimmung/abstimmung?id=${id}`,
     getPolls: ({ offset }) =>
-      `https://www.bundestag.de/ajax/filterlist/de/parlament/plenum/abstimmung/-/484422/?noFilterSet=true&offset=${offset}`,
+      `https://www.bundestag.de/ajax/filterlist/de/parlament/plenum/abstimmung/484422-484422/?noFilterSet=true&offset=${offset}`,
     start: null,
   };
 
