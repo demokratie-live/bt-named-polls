@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0
+
+- [Fix] entry url
+- upgrade packages
+
 ## 0.2.5
 
 - Add all documents property for topic
